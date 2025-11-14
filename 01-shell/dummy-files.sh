@@ -27,3 +27,4 @@ for i in {1..5}; do
     touch /var/log/app/testfile_$i.txt
     touch -d "$((10 + i)) days ago" /var/log/app/testfile_$i.txt
 done
+

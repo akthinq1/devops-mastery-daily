@@ -29,7 +29,7 @@ RESET="\e[0m"
 
 USER=$(id -u)
 
-SOURCE_DIR="/var/log/app"
+SOURCE_DIR="/var/log/ap"
 DESTINATION_DIR="/opt/backups"
 RETENTION_DAYS=7
 LOG_FILE="/var/log/backup_script.log"
@@ -65,3 +65,10 @@ BACKUP_FILE="logs_$TIME.tar.gz"
 
 # confirm backup started
 echo -e "${YELLOW}Starting Log Backup...${RESET}" | tee -a $LOG_FILE
+
+# check source directory is exist or not
+if [ ! -d $SOURCE_DIR ];
+then
+    echo -e "${RED}ERROR: Source directory does not exist: $SRC_DIR${RESET}" | tee -a $LOG_FILE
+    exit 1
+fi
