@@ -29,7 +29,7 @@ RESET="\e[0m"
 
 USER=$(id -u)
 
-SOURCE_DIR="/var/log/ap"
+SOURCE_DIR="/var/log/app"
 DESTINATION_DIR="/opt/backups"
 RETENTION_DAYS=7
 LOG_FILE="/var/log/backup_script.log"
