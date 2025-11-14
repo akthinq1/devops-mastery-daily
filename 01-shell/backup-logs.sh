@@ -29,10 +29,10 @@ RESET="\e[0m"
 
 USER=$(id -u)
 
-SOURCE_DIR="var/log/app"
-DESTINATION_DIR="opt/backups"
+SOURCE_DIR="/var/log/app"
+DESTINATION_DIR="/opt/backups"
 RETENTION_DAYS=7
-LOG_FILE="var/log/backup_script.log"
+LOG_FILE="/var/log/backup_script.log"
 
 # check user is admin or not
 if [ $USER -ne 0 ];
@@ -64,4 +64,4 @@ TIME=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_FILE="logs_$TIME.tar.gz"
 
 # confirm backup started
-echo -e "${YELLOW}Starting Log Backup...${RESET}" | tee -a $LOG_FILE
+echo -e "${YELLOW}Starting Log Backup...${RESET}" #| tee -a $LOG_FILE
