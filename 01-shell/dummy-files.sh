@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo mkdir -p /var/log/app
+sudo mkdir -p /var/log/backup_script.log
 
 echo "created directory"
 
