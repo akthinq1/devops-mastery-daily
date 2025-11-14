@@ -64,4 +64,4 @@ TIME=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_FILE="logs_$TIME.tar.gz"
 
 # confirm backup started
-echo -e "${YELLOW}Starting Log Backup...${RESET}" #| tee -a $LOG_FILE
+echo -e "${YELLOW}Starting Log Backup...${RESET}" | tee -a $LOG_FILE
