@@ -72,3 +72,11 @@ then
     echo -e "${RED}ERROR: Source directory does not exist: $SRC_DIR${RESET}" | tee -a $LOG_FILE
     exit 1
 fi
+
+# check destination directory is exist or not
+if [ ! -d $DESTINATION_DIR ];
+then
+    echo -e "${RED}ERROR: Source directory does not exist: $DESTINATION_DIR${RESET}" | tee -a $LOG_FILE
+    echo "creating destination directory $DESTINATION_DIR" | tee -a $LOG_FILE
+    mkdir -p $DESTINATION_DIR
+fi
