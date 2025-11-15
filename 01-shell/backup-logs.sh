@@ -37,10 +37,10 @@ LOG_FILE="/var/log/backup_script.log"
 # check user is admin or not
 if [ $USER -ne 0 ];
 then
-    echo "need to excecute the script with admin right"
+    echo -e "${RED}need to excecute the script with admin rights${RESET}"
     exit 1
 else
-    echo "script is stareted excecuting"
+    echo -e "${GREEN}script is stareted excecuting...${RESET}"
 fi
 
 #  check override parameters are passed or not
@@ -76,7 +76,26 @@ fi
 # check destination directory is exist or not
 if [ ! -d $DESTINATION_DIR ];
 then
-    echo -e "${RED}ERROR: Source directory does not exist: $DESTINATION_DIR${RESET}" | tee -a $LOG_FILE
-    echo "creating destination directory $DESTINATION_DIR" | tee -a $LOG_FILE
+    echo -e "${RED}ERROR: Destination directory does not exist: $DESTINATION_DIR${RESET}" | tee -a $LOG_FILE
+    echo -e "${YELLOW}creating destination directory $DESTINATION_DIR...${RESET}" | tee -a $LOG_FILE
     mkdir -p $DESTINATION_DIR
 fi
+
+# create backup
+tar -czf $DESTINATION_DIR/$BACKUP_FILE $SOURCE_DIR &>>$LOG_FILE
+if[ $? -ne 0 ];
+then 
+    echo -e "${RED}ERROR: Backup failed.${RESET}" | tee -a $LOG_FILE
+    exit 1
+else
+    echo -e "${GREEN}Backup successful: $BACKUP_DIR/$BACKUP_FILE${RESET}" | tee -a $LOG_FILE
+fi
+
+# Delete old backups
+find "$SOURCE_DIR" -type f -name "*.log" -mtime +$RETENTION_DAYS -delete
+# find "$SOURCE_DIR" -type f -name "*.log" -mtime +$RETENTION_DAYS -exec rm {} \
+
+echo -e "${YELLOW}Old logs cleaned (>$RETENTION_DAYS days).${RESET}" | tee -a $LOG_FILE
+
+echo -e "${GREEN}Backup complete.${RESET}" | tee -a $LOG_FILE
+exit 0
