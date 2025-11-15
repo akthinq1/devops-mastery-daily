@@ -37,7 +37,7 @@ LOG_FILE="/var/log/backup_script.log"
 # check user is admin or not
 if [ $USER -ne 0 ];
 then
-    echo -e "${RED}need to excecute the script with admin rights${RESET}"
+    echo -e "${RED}ERROR:: Need to excecute the script with admin rights${RESET}"
     exit 1
 else
     echo -e "${GREEN}script is stareted excecuting...${RESET}"
